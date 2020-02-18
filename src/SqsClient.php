@@ -122,9 +122,14 @@ class SqsClient extends BaseSqsClient
      */
     public function getQueueName(string $queueName): string
     {
-        if (YII_ENV_DEV) {
-            return 'dev_' . $queueName;
+        if (env("APPLICATION_ENV") == 'local') {
+            return 'local_' . $queueName;
+        } elseif (env("APPLICATION_ENV") == 'stg1' || env("APPLICATION_ENV") == 'stg2' || env("APPLICATION_ENV") == 'stg') {
+            return 'stg_' . $queueName;
+        }elseif (env("APPLICATION_ENV") == 'uat') {
+            return 'uat_' . $queueName;
         }
+        
         return $queueName;
     }
 
