@@ -147,7 +147,7 @@ class Watcher extends Component implements BootstrapInterface
         $receiptHandlers = [];
 
         foreach ($messages as $message) {
-            $messageBodies[$message['MessageId']] = json_decode($message['Body'], true);
+            $messageBodies[$message['MessageId']] = json_encode($message);
             $receiptHandlers[$message['MessageId']] = $message['ReceiptHandle'];
         }
 
